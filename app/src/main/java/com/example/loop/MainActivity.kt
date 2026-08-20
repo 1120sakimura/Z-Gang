@@ -11,10 +11,18 @@ class MainActivity : Activity() {
         setContentView(R.layout.main)
 
         val videoView = findViewById<VideoView>(R.id.video)
-        videoView.setVideoURI(Uri.parse(
-            "android.resource://" + packageName + "/" + R.raw.z
-        ))
-        videoView.setOnCompletionListener { it.start() }
-        videoView.start()
+        val videoUri = Uri.parse("android.resource://${packageName}/${R.raw.z}")
+
+        videoView.setVideoURI(videoUri)
+
+        videoView.setOnPreparedListener { mp ->
+            mp.isLooping = true
+            videoView.start()
+        }
+
+        videoView.setOnErrorListener { _, what, extra ->
+            android.util.Log.e("VideoView", "Error: what=$what extra=$extra")
+            true
+        }
     }
 }
