@@ -1,16 +1,22 @@
 package com.example.loop;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.FrameLayout;
 import android.widget.VideoView;
 
 public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FrameLayout root = new FrameLayout(this);
+        root.setBackgroundColor(Color.BLACK);
 
         VideoView video = new VideoView(this);
         video.setVideoURI(Uri.parse(
@@ -33,6 +39,13 @@ public class MainActivity extends Activity {
             }
         });
 
-        setContentView(video);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        );
+        params.gravity = Gravity.CENTER;
+        root.addView(video, params);
+
+        setContentView(root);
     }
 }
