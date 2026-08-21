@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.loop'
+    namespace 'android.kimyona.zgang'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.loop"
+        applicationId "android.kimyona.zgang"
         minSdk 1
         targetSdk 34
         versionCode 1
